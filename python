@@ -1,0 +1,46 @@
+""" Sophia is organizing a list of event IDs that represent consecutive days of an event. She needs to group these IDs into consecutive sequences. For example, if the IDs 3, 4, and 5 appear consecutively, they should be grouped together. 
+
+
+
+Write a program that helps Sophia by reading the total number of event IDs and the IDs themselves, then display each group of consecutive IDs in tuple format.
+
+Input format :
+The first line of input consists of an integer n, representing the number of event IDs.
+
+The next n lines contain integers representing the event IDs, where each integer corresponds to an event ID.
+
+Output format :
+The output should display each group of consecutive event IDs in a tuple format. Each group should be printed on a new line, and single event IDs should be displayed as a single-element tuple."""
+
+# Read the size of the tuple
+n = int(input())
+
+# Read the tuple elements
+elements = []
+for _ in range(n):
+    elements.append(int(input()))
+
+# Convert list to tuple
+input_tuple = tuple(elements)
+
+# Initialize variables
+result = []
+current_group = [input_tuple[0]]
+
+# Iterate through the tuple to group consecutive integers
+for i in range(1, len(input_tuple)):
+    if input_tuple[i] == input_tuple[i - 1] + 1:
+        current_group.append(input_tuple[i])
+    else:
+        result.append(tuple(current_group))
+        current_group = [input_tuple[i]]
+
+# Append the last group
+result.append(tuple(current_group))
+
+# Print the result with proper formatting
+for group in result:
+    if len(group) == 1:
+        print(f"({group[0]})")
+    else:
+        print(group)
